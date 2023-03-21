@@ -6,7 +6,7 @@ Payment HSM devices are a variation of Dedicated HSM devices with more advanced 
 
 The repo presents 2 designs providing Firewall filtering when accessing Payment HSM.
 
-## 1. Payment HSM networking
+# 1. Payment HSM networking
 
 Before using Azure Payment HSM, make sure to [register the Azure Payment HSM resource providers and resource provider features](https://learn.microsoft.com/en-us/azure/payment-hsm/register-payment-hsm-resource-providers?tabs=azure-cli).
 
@@ -14,7 +14,7 @@ This [tutorial](https://learn.microsoft.com/en-us/azure/payment-hsm/create-payme
 
 PHSM deployments include [High Availability and Distaster Recovery scenarios](https://learn.microsoft.com/en-us/azure/payment-hsm/deployment-scenarios).
 
-### 1.1. PHSM delegated subnet
+## 1.1. PHSM delegated subnet
 
 Like Dedicated HSM, Payment HSM is VNet-injected in a delegated subnet, integrated into a customer VNet. Each Payment HSM device is assigned 2 private IPs from this subnet, one dedicated for management.
 
@@ -27,11 +27,11 @@ Payment HSM comes with some policy [restrictions](https://learn.microsoft.com/en
 
 PHSM is not compatible with vWAN topologies or cross region VNet peering, as listed in the [topology supported](https://learn.microsoft.com/en-us/azure/payment-hsm/solution-design#supported-topologies).
 
-## 2. Solution Architecture
+# 2. Solution Architecture
 
 2 networking designs are available to secure the access to the Payment HSM devices offering filtering and inspection capabilities to bypass the current NSG and UDR constraints.
 
-### 2.1. Option 1: Firewall & SNAT 
+## 2.1. Option 1: Firewall & SNAT 
 
 This design is inspired by the [Dedicated HSM solution architecture](https://learn.microsoft.com/en-us/azure/dedicated-hsm/networking#solution-architecture).
 
