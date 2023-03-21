@@ -56,12 +56,12 @@ This design is inspired by the [Dedicated HSM solution architecture](https://lea
 * Filtering rules that cannot be enforced using NSGs on the PHSM subnet can be configured on the Firewall.
 * Both Spoke traffic and On-Prem traffic to the PHSM environment are secured.
 
-# Solution #2 - Firewall & Reverse Proxy
+# Solution #2 - Firewall & reverse proxy
 
 This design is a good option when performing SNAT on the Firewall is not approved by network security teams, requiring instead to keep the source and destination IPs unchanged for traffic crossing the Firewall.
 
-**Concept**: This architecture leverages a reverse-proxy, deployed in a dedicated subnet in the PHSM VNet directly or in a peered VNet:
-* Instead of sending traffic to the PHSM devices, the destination is set to the reverse-proxy IP, located in a subnet that does not have the restrictions of the PHSM delegated subnet: both NSGs and UDRs can be configured, and combined with a Firewall in the central hub.
+**Concept**: This architecture leverages a reverse proxy, deployed in a dedicated subnet in the PHSM VNet directly or in a peered VNet:
+* Instead of sending traffic to the PHSM devices, the destination is set to the reverse proxy IP, located in a subnet that does not have the restrictions of the PHSM delegated subnet: both NSGs and UDRs can be configured, and combined with a Firewall in the central hub.
 
 **Architecture diagram**:
 
@@ -72,10 +72,10 @@ A reverse proxy is required in this design.
 Possible solutions:
 * F5 (Azure Marketplace ; VM-based)
 * NGINXaaS (Azure Marketplace ; PaaS fully managed)
-* Reverse Proxy Server using NGINX (VM-based)
-* Reverse Proxy Server using HAProxy (VM-based)
+* Reverse proxy Server using NGINX (VM-based)
+* Reverse proxy Server using HAProxy (VM-based)
 
-Example of Reverse Proxy Server using NGINX (VM-based) configuration:
+Example of reverse proxy Server using NGINX (VM-based) configuration:
 ```conf
 # Nginx.conf  
 stream { 
@@ -103,7 +103,7 @@ stream { 
 > ***Gateway Route propagation*** must be disabled on the reverse proxy subnet, so that a 0/0 UDR is enough to force the return traffic via the Firewall 
 
 **Results**:
-* UDRs not being supported on the PHSM subnet can be configured on the reverse-proxy subnet.
+* UDRs not being supported on the PHSM subnet can be configured on the reverse proxy subnet.
 *  The reverse proxy SNATs the client IP: when forwarding traffic to PHSM, the return traffic will automatically be directed back to the reverse proxy.
 * Filtering rules that cannot be enforced using NSGs on the PHSM subnet can be configured on the Firewall and/or on NSGs applied to the reverse proxy subnet.
 * Both Spoke traffic and On-Prem traffic to the PHSM environment are secured.
