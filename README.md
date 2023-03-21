@@ -10,7 +10,7 @@ Intent of this article is to explain how to inspect traffic to Azure Payment HSM
 - [Solution #2 - Firewall & reverse proxy](#solution--2---firewall---reverse-proxy)
 
 
-## Azure Payment HSM
+# Azure Payment HSM
 
 Payment Hardware Security Module (Payment HSM or PHSM) is a [bare-metal service](https://learn.microsoft.com/en-us/azure/payment-hsm/overview) providing cryptographic key operations for real-time and critical payment transactions in the Azure cloud. 
 
