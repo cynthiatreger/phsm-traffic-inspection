@@ -8,7 +8,7 @@ Intent of this article is to explain how to inspect traffic to Azure Payment HSM
   * [Azure Payment HSM - Networking](#azure-payment-hsm---networking)
   * [Azure Payment HSM - Networking limitation](#azure-payment-hsm---networking-limitation)
 - [Solution #1 - Firewall with SNAT](#solution--1---firewall-with-snat)
-- [Solution #2: Firewall & reverse-proxy](#solution--2--firewall---reverse-proxy)
+- [Solution #2 - Firewall & reverse-proxy](#solution--2---firewall---reverse-proxy)
 
 ## Azure Payment HSM
 
@@ -56,7 +56,7 @@ This design is inspired by the [Dedicated HSM solution architecture](https://lea
 * Filtering rules that would have been enforced using NSGs can be configured on the Firewall.
 * Both Spoke traffic and On-Prem traffic to the PHSM environment are secured.
 
-# Solution #2: Firewall & reverse-proxy
+# Solution #2 - Firewall & reverse-proxy
 
 This design is a good option when performing SNAT on the Firewall is not approved by network security teams, requiring instead to keep the source and destination IPs unchanged for traffic crossing the Firewall.
 
