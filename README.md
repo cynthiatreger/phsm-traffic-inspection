@@ -2,7 +2,7 @@
 
 Payment Hardware Security Module (Payment HSM or PHSM) is a [bare-metal service](https://learn.microsoft.com/en-us/azure/payment-hsm/overview) providing cryptographic key operations for real-time and critical payment transactions in the Azure cloud. 
 
-Payment HSM devices are a variation of Dedicated HSM devices with more advanced cryptographic modules. The solution uses hardware from [Thales](https://cpl.thalesgroup.com/encryption/hardware-security-modules/payment-hsms/payshield-10k) as a vendor. The devices are provided in a single tenant to which the customer has [full control and exclusive access](https://learn.microsoft.com/en-us/azure/payment-hsm/overview#customer-managed-hsm-in-azure).
+Payment HSM devices are a variation of Dedicated HSM devices with more advanced cryptographic modules. The solution uses hardware from [Thales](https://cpl.thalesgroup.com/encryption/hardware-security-modules/payment-hsms/payshield-10k) as a vendor. The devices are provided in a single tenant, dedicated to the customer who has [full control and exclusive access](https://learn.microsoft.com/en-us/azure/payment-hsm/overview#customer-managed-hsm-in-azure).
 
 The repo presents 2 designs providing Firewall filtering when accessing Payment HSM.
 
