@@ -58,7 +58,19 @@ This design is a good option when performing SNAT on the Firewall is not approve
 **Architecture diagram**:
 
 ![image](https://user-images.githubusercontent.com/110976272/226541198-40a74904-4713-4caa-a059-778727f423c7.png)
+
 **Infrastructure required**:
+A reverse proxy is required in this design.
+Possible solutions:
+* F5 (Azure Marketplace ; VM-based)
+* NGINXaaS (Azure Marketplace ; PaaS)
+* NGINX (VM-based)
+* HAProxy (VM-based)
+
+Example of NGINX (VM-based) configuration:
+```
+
+```
 
 **Route tables required**:
 1. On-Prem to PHSM: a Route Table containing a UDR for the Payment HSM VNet range and pointing to the central hub Firewall is applied to the GatewaySubnet.
