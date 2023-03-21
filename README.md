@@ -37,7 +37,7 @@ This design is inspired by the [Dedicated HSM solution architecture](https://lea
 
 ![image](https://user-images.githubusercontent.com/110976272/226541241-8b593ca9-341f-4327-adb9-e88db73b5c8e.png)
 
-1. On-Prem to PHSM: a Route Table containing a UDR for the Payment HSM subnet and pointing to the central hub Firewall is applied to the GatewaySubnet.
+1. On-Prem to PHSM: a Route Table containing a UDR for the Payment HSM VNet range and pointing to the central hub Firewall is applied to the GatewaySubnet.
 
 2. Spoke VNet to PHSM: a Route Table containing a UDR for the Payment HSM subnet and pointing to the central hub Firewall is applied to the Spoke VNet subnets. 
 
@@ -61,7 +61,7 @@ This architecture leverages a reverse-proxy, deployed in a dedicated subnet in t
 
 ![image](https://user-images.githubusercontent.com/110976272/226541198-40a74904-4713-4caa-a059-778727f423c7.png)
 
-1. On-Prem to PHSM: a Route Table containing a UDR for the reverse-proxy IP and pointing to the central hub Firewall is applied to the GatewaySubnet.
+1. On-Prem to PHSM: a Route Table containing a UDR for the Payment HSM VNet range and pointing to the central hub Firewall is applied to the GatewaySubnet.
 
 2. Spoke VNet to PHSM a Route Table containing a UDR for the reverse-proxy IP and pointing to the central hub Firewall is applied to the Spoke VNet subnets. 
 
