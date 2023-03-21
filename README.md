@@ -1,4 +1,4 @@
-# Azure Payment HSM - Inspect traffic 
+# Azure Payment HSM traffic inspection
 
 Intent of this article is to explain how to inspect traffic to Azure Payment HSM.
 
