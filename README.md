@@ -1,4 +1,4 @@
-# Securing PHSM Connectivity
+# Securing Access to PHSM
 
 Payment Hardware Security Module (Payment HSM or PHSM) is a [bare-metal service](https://learn.microsoft.com/en-us/azure/payment-hsm/overview) providing cryptographic key operations for real-time and critical payment transactions in the Azure cloud. 
 
