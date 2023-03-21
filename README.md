@@ -5,7 +5,7 @@ Intent of this article is to explain how to inspect traffic to Azure Payment HSM
 **Table of content**:
 - [Azure Payment HSM](#azure-payment-hsm)
   * [Azure Payment HSM - Networking](#azure-payment-hsm---networking)
-  * [Azure Payment HSM - Networking limitation](#azure-payment-hsm---networking-limitation)
+  * [Azure Payment HSM - Networking limitations](#azure-payment-hsm---networking-limitations)
 - [Solution #1 - Firewall with SNAT](#solution--1---firewall-with-snat)
 - [Solution #2 - Firewall & reverse proxy](#solution--2---firewall---reverse-proxy)
 
@@ -27,7 +27,7 @@ When Payment HSM is deployed, it comes with a host network interface and a manag
 
 In all of the above scenarios, Payment HSM is a VNet-injected service in a delegated subnet: `hsmSubnet` and `managementHsmSubnet` must be delegated to `Microsoft.HardwareSecurityModules/dedicatedHSMs` service.
 
-## Azure Payment HSM - Networking limitation
+## Azure Payment HSM - Networking limitations
 
 Payment HSM comes with some policy [restrictions](https://learn.microsoft.com/en-us/azure/payment-hsm/solution-design#constraints) on these subnets: **Network Security Groups (NSGs) and User-Defined Routes (UDRs) are currently not supported**.
 
