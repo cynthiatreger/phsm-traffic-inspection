@@ -99,7 +99,7 @@ stream { 
 1. On-Prem to PHSM: a Route Table containing a UDR for the Payment HSM VNet range and pointing to the central hub Firewall is applied to the GatewaySubnet.
 2. Spoke VNet(s) to PHSM: a Route Table containing the usual default route pointing to the central hub Firewall is applied to the Spoke VNet(s) subnets. 
 
-> ***Gateway Route propagation*** must be disabled on the reverse proxy subnet, so that a 0/0 UDR is enough to force the return traffic via the Firewall 
+> ***Gateway Route propagation*** must be disabled on the reverse proxy subnet, so that a 0/0 UDR is enough to force the return traffic via the Firewall.
 
 **Results**:
 * UDRs not being supported on the PHSM subnet can be configured on the reverse proxy subnet.
