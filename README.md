@@ -1,39 +1,35 @@
-# Securing Access to PHSM
+# Azure Payment HSM - Inspect traffic 
+
+Intent of this article is to explain how to inspect traffic to Azure Payment HSM.
+
+## Azure Payment HSM
 
 Payment Hardware Security Module (Payment HSM or PHSM) is a [bare-metal service](https://learn.microsoft.com/en-us/azure/payment-hsm/overview) providing cryptographic key operations for real-time and critical payment transactions in the Azure cloud. 
 
-Payment HSM devices are a variation of Dedicated HSM devices with more advanced cryptographic modules. A Payment HSM supports *PIN block translation*, i.e. never decrypts the PIN value in transit (making the actual PIN value much harder to discover by an attacker), while the general purpose HSMs are not capable of this end-to-end ¨PIN encryption.
+Payment HSM devices are a variation of Dedicated HSM devices with more advanced cryptographic modules and features: a Payment HSM never decrypts the PIN value in transit for example. 
 
-The solution uses hardware from [Thales](https://cpl.thalesgroup.com/encryption/hardware-security-modules/payment-hsms/payshield-10k) as a vendor. The devices are provided in a single tenant, dedicated to the customer who has [full control and exclusive access](https://learn.microsoft.com/en-us/azure/payment-hsm/overview#customer-managed-hsm-in-azure).
+The Azure Payment HSM solution uses hardware from [Thales](https://cpl.thalesgroup.com/encryption/hardware-security-modules/payment-hsms/payshield-10k) as a vendor. Customers have [full control and exclusive access](https://learn.microsoft.com/en-us/azure/payment-hsm/overview#customer-managed-hsm-in-azure) to the Payment HSM.
 
-The repo presents 2 designs providing Firewall filtering when accessing Payment HSM.
+## Azure Payment HSM - Networking
 
-# 1. Payment HSM networking
+When Payment HSM is deployed, it comes with a host network interface and a management network interface. There are several deployment scenarios:
+1. [With host and management ports in same VNet](https://learn.microsoft.com/en-us/azure/payment-hsm/create-payment-hsm?tabs=azure-cli)
+2. [With host and management ports in different VNets](https://learn.microsoft.com/en-us/azure/payment-hsm/create-different-vnet?tabs=azure-cli)
+3. [With host and management port with IP addresses in different VNets](https://learn.microsoft.com/en-us/azure/payment-hsm/create-different-ip-addresses?tabs=azure-cli)
 
-Before using Azure Payment HSM, make sure to [register the Azure Payment HSM resource providers and resource provider features](https://learn.microsoft.com/en-us/azure/payment-hsm/register-payment-hsm-resource-providers?tabs=azure-cli).
+In all of the above scenarios, Payment HSM is a VNet-injected service in a delegated subnet: `hsmSubnet` and `managementHsmSubnet` must be delegated to `Microsoft.HardwareSecurityModules/dedicatedHSMs` service.
 
-This [tutorial](https://learn.microsoft.com/en-us/azure/payment-hsm/create-payment-hsm?tabs=azure-cli) provides the deployment steps of a Payment HSM device.
+## Azure Payment HSM - Networking limitation
 
-PHSM deployments include [High Availability and Distaster Recovery scenarios](https://learn.microsoft.com/en-us/azure/payment-hsm/deployment-scenarios).
+Payment HSM comes with some policy [restrictions](https://learn.microsoft.com/en-us/azure/payment-hsm/solution-design#constraints) on these subnets: **Network Security Groups (NSGs) and User-Defined Routes (UDRs) are currently not supported**.
 
-## 1.1. PHSM delegated subnet
+> Note: PHSM is not compatible with vWAN topologies or cross region VNet peering, as listed in the [topology supported](https://learn.microsoft.com/en-us/azure/payment-hsm/solution-design#supported-topologies).
 
-Like Dedicated HSM, Payment HSM is VNet-injected in a delegated subnet, integrated into a customer VNet. Each Payment HSM device is assigned 2 private IPs from this subnet, one dedicated for management.
+This article present two ways to inspect traffic destined to a Payment HSM:
+* Solution #1 - Firewall with SNAT
+* Solution #2 - Firewall & Reverse proxy
 
-The devices can be accessed from the peered Azure VNets as well as from the customer On-Prem network (via ER or VPN for example).
-
-
-## 1.2. Networking restrictions
-
-Payment HSM comes with some policy [restrictions](https://learn.microsoft.com/en-us/azure/payment-hsm/solution-design#constraints) on this subnet: Network Security Groups (NSGs) and User-Defined Routes (UDRs) are currently not supported.
-
-PHSM is not compatible with vWAN topologies or cross region VNet peering, as listed in the [topology supported](https://learn.microsoft.com/en-us/azure/payment-hsm/solution-design#supported-topologies).
-
-# 2. Solution Architecture
-
-2 networking designs are available to secure the access to the Payment HSM devices offering filtering and inspection capabilities to bypass the current NSG and UDR constraints.
-
-## 2.1. Option 1: Firewall & SNAT 
+# Solution #1 - Firewall with SNAT
 
 This design is inspired by the [Dedicated HSM solution architecture](https://learn.microsoft.com/en-us/azure/dedicated-hsm/networking#solution-architecture).
 
