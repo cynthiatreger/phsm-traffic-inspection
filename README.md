@@ -3,7 +3,7 @@
 Intent of this article is to explain how to inspect traffic to Azure Payment HSM.
 
 **Table of content**:
-  - [Azure Payment HSM - Inspect traffic](#azure-payment-hsm---inspect-traffic)
+- [Azure Payment HSM - Inspect traffic](#azure-payment-hsm---inspect-traffic)
   * [Azure Payment HSM](#azure-payment-hsm)
   * [Azure Payment HSM - Networking](#azure-payment-hsm---networking)
   * [Azure Payment HSM - Networking limitation](#azure-payment-hsm---networking-limitation)
