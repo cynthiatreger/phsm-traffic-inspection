@@ -37,7 +37,7 @@ This design is inspired by the [Dedicated HSM solution architecture](https://lea
 
 **Architecture diagram**:
 
-![image](https://user-images.githubusercontent.com/110976272/226541241-8b593ca9-341f-4327-adb9-e88db73b5c8e.png)
+![image](docs/solution1.png)
 
 **Route tables required**:
 1. On-Prem to PHSM: a Route Table containing a UDR for the Payment HSM VNet range and pointing to the central hub Firewall is applied to the GatewaySubnet.
@@ -57,19 +57,35 @@ This design is a good option when performing SNAT on the Firewall is not approve
 
 **Architecture diagram**:
 
-![image](https://user-images.githubusercontent.com/110976272/226541198-40a74904-4713-4caa-a059-778727f423c7.png)
+![image](docs/solution2.png)
 
 **Infrastructure required**:
 A reverse proxy is required in this design.
 Possible solutions:
 * F5 (Azure Marketplace ; VM-based)
-* NGINXaaS (Azure Marketplace ; PaaS)
-* NGINX (VM-based)
-* HAProxy (VM-based)
+* NGINXaaS (Azure Marketplace ; PaaS fully managed)
+* Reverse Proxy Server using NGINX (VM-based)
+* Reverse Proxy Server using HAProxy (VM-based)
 
-Example of NGINX (VM-based) configuration:
-```
+Example of Reverse Proxy Server using NGINX (VM-based) configuration:
+```conf
+# Nginx.conf  
+stream { 
+    server { 
+        listen 1500; 
+        proxy_pass 10.2.0.4:1500; 
+    } 
 
+    upstream phsm { 
+        server 10.2.0.5:443; 
+    } 
+
+    server { 
+        listen 443; 
+        proxy_pass phsm; 
+        proxy_next_upstream on; 
+    } 
+} 
 ```
 
 **Route tables required**:
