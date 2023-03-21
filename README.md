@@ -3,7 +3,7 @@
 Intent of this article is to explain how to inspect traffic to Azure Payment HSM.
 
 **Table of content**:
-- [Azure Payment HSM - Inspect traffic](#azure-payment-hsm---inspect-traffic)
+  - [Azure Payment HSM - Inspect traffic](#azure-payment-hsm---inspect-traffic)
   * [Azure Payment HSM](#azure-payment-hsm)
   * [Azure Payment HSM - Networking](#azure-payment-hsm---networking)
   * [Azure Payment HSM - Networking limitation](#azure-payment-hsm---networking-limitation)
@@ -60,8 +60,7 @@ This design is inspired by the [Dedicated HSM solution architecture](https://lea
 
 This design is a good option when performing SNAT on the Firewall is not approved by network security teams, requiring instead to keep the source and destination IPs unchanged for traffic crossing the Firewall.
 
-**Concept**: This architecture leverages a reverse proxy, deployed in a dedicated subnet in the PHSM VNet directly or in a peered VNet:
-* Instead of sending traffic to the PHSM devices, the destination is set to the reverse proxy IP, located in a subnet that does not have the restrictions of the PHSM delegated subnet: both NSGs and UDRs can be configured, and combined with a Firewall in the central hub.
+**Concept**: This architecture leverages a reverse proxy, deployed in a dedicated subnet in the PHSM VNet directly or in a peered VNet. Instead of sending traffic to the PHSM devices, the destination is set to the reverse proxy IP, located in a subnet that does not have the restrictions of the PHSM delegated subnet: both NSGs and UDRs can be configured, and combined with a Firewall in the central hub.
 
 **Architecture diagram**:
 
