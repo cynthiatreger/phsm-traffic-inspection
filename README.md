@@ -8,7 +8,7 @@ Intent of this article is to explain how to inspect traffic to Azure Payment HSM
   * [Azure Payment HSM - Networking](#azure-payment-hsm---networking)
   * [Azure Payment HSM - Networking limitation](#azure-payment-hsm---networking-limitation)
 - [Solution #1 - Firewall with SNAT](#solution--1---firewall-with-snat)
-- [Solution #2 - Firewall & reverse-proxy](#solution--2---firewall---reverse-proxy)
+- [Solution #2 - Firewall & reverse proxy](#solution--2---firewall---reverse-proxy)
 
 ## Azure Payment HSM
 
@@ -35,7 +35,7 @@ Payment HSM comes with some policy [restrictions](https://learn.microsoft.com/en
 
 This article present two ways to inspect traffic destined to a Payment HSM:
 * Solution #1 - Firewall with SNAT
-* Solution #2 - Firewall & Reverse proxy
+* Solution #2 - Firewall & reverse proxy
 
 # Solution #1 - Firewall with SNAT
 
@@ -52,11 +52,11 @@ This design is inspired by the [Dedicated HSM solution architecture](https://lea
 2. Spoke VNet(s) to PHSM: a Route Table containing the usual default route pointing to the central hub Firewall is applied to the Spoke VNet(s) subnets. 
 
 **Results**:
-* The lack of UDRs is addressed by the Firewall doing SNAT on the client IP: when forwarding traffic to PHSM, the return traffic will automatically be directed back to the Firewall.
-* Filtering rules that would have been enforced using NSGs can be configured on the Firewall.
+* UDRs not being supported on the PHSM subnet is addressed by the Firewall doing SNAT on the client IP: when forwarding traffic to PHSM, the return traffic will automatically be directed back to the Firewall.
+* Filtering rules that cannot be enforced using NSGs on the PHSM subnet can be configured on the Firewall.
 * Both Spoke traffic and On-Prem traffic to the PHSM environment are secured.
 
-# Solution #2 - Firewall & reverse-proxy
+# Solution #2 - Firewall & Reverse Proxy
 
 This design is a good option when performing SNAT on the Firewall is not approved by network security teams, requiring instead to keep the source and destination IPs unchanged for traffic crossing the Firewall.
 
@@ -100,11 +100,11 @@ stream { 
 1. On-Prem to PHSM: a Route Table containing a UDR for the Payment HSM VNet range and pointing to the central hub Firewall is applied to the GatewaySubnet.
 2. Spoke VNet(s) to PHSM: a Route Table containing the usual default route pointing to the central hub Firewall is applied to the Spoke VNet(s) subnets. 
 
-> ***Gateway Route propagation*** must be disabled on the reverse-proxy subnet, so that a 0/0 UDR is enough to force the return traffic via the Firewall 
+> ***Gateway Route propagation*** must be disabled on the reverse proxy subnet, so that a 0/0 UDR is enough to force the return traffic via the Firewall 
 
 **Results**:
-* UDRs not supported on the PHSM subnet is addressed by the reverse proxy (doing SNAT on the client IP): when forwarding traffic to PHSM, the return traffic will automatically be directed back to the reverse proxy.
-* TO COMPLETE CYNTHIA
-* Filtering rules that cannot be enforced using NSGs on dedicated PHSM subnet can be configured on the Firewall and/or on the reverse proxy subnet using NSG.
+* UDRs not being supported on the PHSM subnet can be configured on the reverse-proxy subnet.
+*  The reverse proxy SNATs the client IP: when forwarding traffic to PHSM, the return traffic will automatically be directed back to the reverse proxy.
+* Filtering rules that cannot be enforced using NSGs on the PHSM subnet can be configured on the Firewall and/or on NSGs applied to the reverse proxy subnet.
 * Both Spoke traffic and On-Prem traffic to the PHSM environment are secured.
 
