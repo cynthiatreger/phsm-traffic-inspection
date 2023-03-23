@@ -80,11 +80,11 @@ Example of reverse proxy Server using NGINX (VM-based) configuration:
 stream { 
     server { 
         listen 1500; 
-        proxy_pass 10.2.0.4:1500; 
+        proxy_pass 10.221.8.4:1500; 
     } 
 
     upstream phsm { 
-        server 10.2.0.5:443; 
+        server 10.221.8.5:443; 
     } 
 
     server { 
