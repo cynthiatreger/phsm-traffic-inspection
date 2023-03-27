@@ -30,7 +30,7 @@ In all of the above scenarios, Payment HSM is a VNet-injected service in a deleg
 
 ## FastPathEnabled feature & tag
 
-In addition, the `FastPathEnabled` **feature** must be [registered and approved](https://learn.microsoft.com/en-us/azure/payment-hsm/register-payment-hsm-resource-providers?tabs=azure-cli#register-the-resource-providers-and-features) on all subscritptions that need access to Payment HSM.
+In addition, the `FastPathEnabled` **feature** must be [registered and approved](https://learn.microsoft.com/en-us/azure/payment-hsm/register-payment-hsm-resource-providers?tabs=azure-cli#register-the-resource-providers-and-features) on all subscriptions that need access to Payment HSM.
 
 A second step consists in enabling the `fastpathenabled` **tag** on all the VNets that require [connectivity to the Payment HSM VNet](https://learn.microsoft.com/en-us/azure/payment-hsm/peer-vnets?tabs=azure-cli). This operation must be done via CLI.
 
