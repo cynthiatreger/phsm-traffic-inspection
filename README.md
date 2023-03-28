@@ -56,7 +56,7 @@ This design is inspired by the [Dedicated HSM solution architecture](https://lea
 
 **Architecture diagram**:
 
-![image](docs/solution1.png)
+![image](docs/solution1fp.png)
 
 **Route tables required**:
 1. On-Prem to PHSM: a Route Table containing a UDR for the Payment HSM VNet range and pointing to the central hub Firewall is applied to the GatewaySubnet.
@@ -75,7 +75,7 @@ This design is a good option when performing SNAT on the Firewall is not approve
 
 **Architecture diagram**:
 
-![image](docs/solution2.png)
+![image](docs/solution2fp.png)
 
 **Infrastructure required**:
 A reverse proxy is required in this design.
