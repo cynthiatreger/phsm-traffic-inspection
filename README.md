@@ -34,7 +34,7 @@ In addition, the `FastPathEnabled` **feature** must be [registered and approved]
 
 A second step consists in enabling the `fastpathenabled` **tag** on all the VNets that require [connectivity to the Payment HSM VNet](https://learn.microsoft.com/en-us/azure/payment-hsm/peer-vnets?tabs=azure-cli). This operation must be done via CLI.
 
-For the `fastpathenabled` VNet tag to be valid the `FastPathEnabled` feature needs to be enabled on the subscription where that VNet is deployed: make sure to complete both steps to enable resources to connect to the Payment HSM devices. 
+For the `fastpathenabled` VNet tag to be valid, the `FastPathEnabled` feature needs to be enabled on the subscription where that VNet is deployed: make sure to complete both steps to enable resources to connect to the Payment HSM devices. 
 
 Adding the `FastPathEnabled` feature and enabling the `fastpathenabled` tag don't cause any downtime.
  
