@@ -5,7 +5,7 @@ Intent of this article is to explain how to inspect traffic to Azure Payment HSM
 **Table of content**:
 - [Azure Payment HSM](#azure-payment-hsm)
   * [Azure Payment HSM - Networking](#azure-payment-hsm---networking)
-  * [FastPathEnabled feature and tag](https://github.com/cynthiatreger/phsm-traffic-inspection#fastpathenabled-feature--tag)
+  * [FastPathEnabled feature flag & fastpathenabled VNet tag](https://github.com/cynthiatreger/phsm-traffic-inspection#fastpathenabled-feature-flag---fastpathenabled-vnet-tag)
   * [Azure Payment HSM - Networking limitations](#azure-payment-hsm---networking-limitations)
 - [Solution #1 - Firewall with SNAT](#solution--1---firewall-with-snat)
 - [Solution #2 - Firewall & reverse proxy](#solution--2---firewall---reverse-proxy)
@@ -28,7 +28,7 @@ When Payment HSM is deployed, it comes with a host network interface and a manag
 
 In all of the above scenarios, Payment HSM is a VNet-injected service in a delegated subnet: `hsmSubnet` and `managementHsmSubnet` must be delegated to `Microsoft.HardwareSecurityModules/dedicatedHSMs` service.
 
-## FastPathEnabled feature & tag
+## FastPathEnabled feature flag & fastpathenabled VNet tag
 
 In addition, the `FastPathEnabled` **feature** must be [registered and approved](https://learn.microsoft.com/en-us/azure/payment-hsm/register-payment-hsm-resource-providers?tabs=azure-cli#register-the-resource-providers-and-features) on all subscriptions that need access to Payment HSM.
 
@@ -37,6 +37,8 @@ A second step consists in enabling the `fastpathenabled` **tag** on the VNet hos
 For the `fastpathenabled` VNet tag to be valid, the `FastPathEnabled` feature needs to be enabled on the subscription where that VNet is deployed: make sure to complete both steps to enable resources to connect to the Payment HSM devices. 
 
 Adding the `FastPathEnabled` feature and enabling the `fastpathenabled` tag don't cause any downtime.
+
+The public documentation related to these 2 settings is currently under review and will be available shortly.
  
 ## Azure Payment HSM - Networking limitations
 
