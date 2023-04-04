@@ -38,7 +38,7 @@ For the `fastpathenabled` VNet tag to be valid, the `FastPathEnabled` feature ne
 
 Adding the `FastPathEnabled` feature and enabling the `fastpathenabled` tag don't cause any downtime.
 
-The public documentation related to these 2 settings is currently under review and will be available shortly.
+The public documentation related to these 2 settings is now available [here](https://learn.microsoft.com/en-us/azure/payment-hsm/fastpathenabled).
  
 ## Azure Payment HSM - Networking limitations
 
