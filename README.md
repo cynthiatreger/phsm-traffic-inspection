@@ -8,7 +8,7 @@ The intent of this article is to explain how to inspect traffic to Azure Payment
   * [FastPathEnabled feature flag & fastpathenabled VNet tag](https://github.com/cynthiatreger/phsm-traffic-inspection#fastpathenabled-feature-flag--fastpathenabled-vnet-tag)
   * [Azure Payment HSM - Networking limitations](#azure-payment-hsm---networking-limitations)
 - [Solution #1 - Firewall with SNAT](https://github.com/cynthiatreger/phsm-traffic-inspection#solution-1---firewall-with-snat)
-- [Solution #2 - Firewall & reverse proxy](https://github.com/cynthiatreger/phsm-traffic-inspection#solution--2---firewall---reverse-proxy)
+- [Solution #2 - Firewall & reverse proxy](https://github.com/cynthiatreger/phsm-traffic-inspection#solution-2---firewall--reverse-proxy)
 
 
 # Azure Payment HSM
