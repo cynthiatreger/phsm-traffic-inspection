@@ -1,14 +1,14 @@
 # Azure Payment HSM traffic inspection
 
-Intent of this article is to explain how to inspect traffic to Azure Payment HSM.
+The intent of this article is to explain how to inspect traffic to Azure Payment HSM and has since then led to the following Microsoft public documentation: [Azure Payment HSM traffic inspection](https://learn.microsoft.com/en-us/azure/payment-hsm/inspect-traffic) and [Fastpathenabled](https://learn.microsoft.com/en-us/azure/payment-hsm/fastpathenabled).
 
 **Table of content**:
 - [Azure Payment HSM](#azure-payment-hsm)
   * [Azure Payment HSM - Networking](#azure-payment-hsm---networking)
   * [FastPathEnabled feature flag & fastpathenabled VNet tag](https://github.com/cynthiatreger/phsm-traffic-inspection#fastpathenabled-feature-flag--fastpathenabled-vnet-tag)
   * [Azure Payment HSM - Networking limitations](#azure-payment-hsm---networking-limitations)
-- [Solution #1 - Firewall with SNAT](#solution--1---firewall-with-snat)
-- [Solution #2 - Firewall & reverse proxy](#solution--2---firewall---reverse-proxy)
+- [Solution #1 - Firewall with SNAT](https://github.com/cynthiatreger/phsm-traffic-inspection#solution-1---firewall-with-snat)
+- [Solution #2 - Firewall & reverse proxy](https://github.com/cynthiatreger/phsm-traffic-inspection#solution--2---firewall---reverse-proxy)
 
 
 # Azure Payment HSM
@@ -32,7 +32,7 @@ In all of the above scenarios, Payment HSM is a VNet-injected service in a deleg
 
 In addition, the `FastPathEnabled` **feature** must be [registered and approved](https://learn.microsoft.com/en-us/azure/payment-hsm/register-payment-hsm-resource-providers?tabs=azure-cli#register-the-resource-providers-and-features) on all subscriptions that need access to Payment HSM.
 
-A second step consists in enabling the `fastpathenabled` **tag** on the VNet hosting the Payment HSM delegated subnet and on every peered VNet requiring [connectivity to the Payment HSM devices](https://learn.microsoft.com/en-us/azure/payment-hsm/peer-vnets?tabs=azure-cli). This operation must be done via CLI.
+A second step consists in enabling the `fastpathenabled` **tag** on the VNet hosting the Payment HSM delegated subnet and on every peered VNet requiring [connectivity to the Payment HSM devices](https://learn.microsoft.com/en-us/azure/payment-hsm/peer-vnets?tabs=azure-cli). The `fastpathenabled` tag isn't required on nondirectly peered VNets reaching the Payment HSM VNet via a Central hub for example. This operation must be done via CLI.
 
 For the `fastpathenabled` VNet tag to be valid, the `FastPathEnabled` feature needs to be enabled on the subscription where that VNet is deployed: make sure to complete both steps to enable resources to connect to the Payment HSM devices. 
 
